@@ -192,7 +192,7 @@ body{
 .sent::before, .received::before{
     position: absolute;
     top: 5px;
-    right: 15px;
+    right: 10px;
     content: "\f078";
     font-family: "Font Awesome 5 Free";
     font-size: 12px;
