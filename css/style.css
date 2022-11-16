@@ -163,10 +163,6 @@ body{
     width: 100%;
 }
 
-.chat-left-side:hover{
-    background-color: rgb(233, 235, 235);
-}
-
 .right-side .last-access{
     font-size: 12px;
     color: gray;
@@ -183,7 +179,8 @@ body{
 
 .sent, .received{
     position: relative;
-    width: 40%;
+    min-width: 15%;
+    max-width: 40%;
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -208,11 +205,12 @@ body{
 
 .chat .sent{
     background-color: rgb(213, 249, 186);
-    align-self: end;
+    align-self: flex-end;
 }
 
 .chat .received{
     background-color: white;
+    align-self: flex-start;
 }
 
 .chat-time{
@@ -241,8 +239,11 @@ body{
     border: none;
 }
 
-.bottom-bar i{
-    font-size: 20px;
-    color: rgb(177, 177, 177);
-    cursor: pointer;;
+/* hover effects */
+.chat-left-side:hover{
+    background-color: rgb(233, 235, 235);
+}
+
+.icon:hover{
+    color: gray;
 }
