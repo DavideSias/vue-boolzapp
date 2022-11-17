@@ -5,17 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whatsapp Web</title>
+
     <!-- link css -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js" defer></script>
+
     <!-- script js -->
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <div class="container">
+    <div id="root" class="container" v-cloak>
         <div class="left-side">
             <div class="profile-bar">
                 <div class="profile">
@@ -45,16 +54,17 @@
                 <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
             <div class="chat-messages">
-                <div class="chat-left-side">
-                    <img class="avatar" src="img/avatar_2.jpg" alt="">
+                <div class="chat-left-side" v-for="(contact, i) in arrContacts">
+                    <img class="avatar" :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar">
                     <div class="user-update">
                         <div class="user-info">
-                            <h2 class="username">Michele</h2>
-                            <p class="time">12:00</p>
+                            <h2 class="username">{{ contact.name }}</h2>
+                            <p class="time">{{ contact.messages[contact.messages.length - 1].date }}</p>
                         </div>
-                        <p class="last-message">Ultimo messaggio inviato</p>
+                        <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</p>
                     </div>
                 </div>
+                
             </div>
         </div>
         <div class="right-side">
