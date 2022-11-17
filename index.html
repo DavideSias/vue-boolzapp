@@ -51,13 +51,13 @@
                 <button>
                     <i class="fa-solid fa-magnifying-glass icon"></i>
                 </button>
-                <input type="text" placeholder="Cerca o inizia una nuova chat">
+                <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="search" />
             </div>
             <div class="chat-messages">
                 <div 
                 class="chat-left-side" 
-                v-for="(contact, i) in arrContacts" 
-                :key="contact.avatar"
+                v-for="(contact, i) in filteredName" 
+                :key="contact.id"
                 @click="activeIndex = i"
                 >
                     <img class="avatar" :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar">
@@ -70,25 +70,24 @@
                         </p>
                     </div>
                 </div>
-                
             </div>
         </div>
         <div class="right-side">
             <div class="user-status-top">
                 <div class="profile-bar">
                     <div class="profile">
-                        <img class="profile-img" src="img/avatar_1.jpg" alt="">
+                        <img class="profile-img" v-for="(element, i) in filteredName"  :class="{active: i === activeIndex}" :src="'img/avatar' + element.avatar + '.jpg'"  alt="avatar">
                         <div class="name-avatar">
                             <p 
                             class="show-name" 
-                            v-for="(element, i) in arrContacts"
+                            v-for="(element, i) in filteredName"
                             :class="{active: i === activeIndex}"
                             >
                                 {{ element.name }}
                             </p>
                             <p class="last-access"
                             class="show-name" 
-                            v-for="(element, i) in arrContacts"
+                            v-for="(element, i) in filteredName"
                             :class="{active: i === activeIndex}"
                             >
                                 Ultimo accesso {{element.messages[element.messages.length - 1].date}}
@@ -106,12 +105,11 @@
             <div class="chat">
                 <div 
                 class="chat-render" 
-                v-for="(contact, i) in arrContacts" 
+                v-for="(contact, i) in filteredName" 
                 :class="{active: i === activeIndex}"
-                :key="contact.name"
                 >
                 <div class="flex-container">
-                    <div v-for="messaggio in contact.messages" :class="messaggio.status" :key="messaggio.message">
+                    <div v-for="messaggio in contact.messages" :class="messaggio.status">
 
                         {{messaggio.message}}  
 

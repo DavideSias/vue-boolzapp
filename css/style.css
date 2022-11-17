@@ -27,6 +27,7 @@ body{
     width: 1400px;
     height: calc(100vh - 40px);
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .left-side{
@@ -64,6 +65,7 @@ body{
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    display: none;
 }
 
 .icon{

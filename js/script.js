@@ -6,6 +6,7 @@ let app = new Vue({
                 name: 'Michele',
                 avatar: '_1',
                 visible: true,
+                id: 01,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -28,6 +29,7 @@ let app = new Vue({
                 name: 'Fabio',
                 avatar: '_2',
                 visible: true,
+                id: 02,
                 messages: [
                     {
                         date: '20/03/2020 16:30:00',
@@ -50,6 +52,7 @@ let app = new Vue({
                 name: 'Samuele',
                 avatar: '_3',
                 visible: true,
+                id: 03,
                 messages: [
                     {
                         date: '28/03/2020 10:10:40',
@@ -72,6 +75,7 @@ let app = new Vue({
                 name: 'Alessandro B.',
                 avatar: '_4',
                 visible: true,
+                id: 04,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -89,6 +93,7 @@ let app = new Vue({
                 name: 'Alessandro L.',
                 avatar: '_5',
                 visible: true,
+                id: 05,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -106,6 +111,7 @@ let app = new Vue({
                 name: 'Claudia',
                 avatar: '_6',
                 visible: true,
+                id: 06,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -128,6 +134,7 @@ let app = new Vue({
                 name: 'Federico',
                 avatar: '_7',
                 visible: true,
+                id: 07,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -145,6 +152,7 @@ let app = new Vue({
                 name: 'Davide',
                 avatar: '_8',
                 visible: true,
+                id: 08,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -165,6 +173,7 @@ let app = new Vue({
             }
         ],
         activeIndex: 0,
+        search: '',
         newMessage :
             {
                 date: '10/01/2020 15:30:55',
@@ -182,10 +191,16 @@ let app = new Vue({
         sendMessage(index){
             if (this.newMessage.message.trim()) {
 				this.newMessage.message = this.newMessage.message.trim();
-                this.arrContacts[index].messages.push({...this.newMessage});
+                this.filteredName[index].messages.push({...this.newMessage});
                 this.newMessage.message = '';
-                setTimeout(() => this.arrContacts[index].messages.push(this.newAnswer), 1000);
+                setTimeout(() => this.filteredName[index].messages.push(this.newAnswer), 1000);
             }
+        }
+    },
+    computed: {
+        filteredName(){
+            console.log(this.search);
+            return this.arrContacts.filter(names => names.name.toLowerCase().includes(this.search.toLowerCase()));
         }
     }
 })
