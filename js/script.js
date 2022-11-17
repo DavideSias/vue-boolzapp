@@ -163,6 +163,7 @@ let app = new Vue({
                     }
                 ],
             }
-        ]
-    }
+        ],
+        activeIndex: 0,
+    },
 })

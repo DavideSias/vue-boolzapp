@@ -54,7 +54,12 @@
                 <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
             <div class="chat-messages">
-                <div class="chat-left-side" v-for="(contact, i) in arrContacts">
+                <div 
+                class="chat-left-side" 
+                v-for="(contact, i) in arrContacts" 
+                :key="contact.avatar"
+                @click="activeIndex = i"
+                >
                     <img class="avatar" :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar">
                     <div class="user-update">
                         <div class="user-info">
@@ -86,21 +91,18 @@
                 </div>
             </div>
             <div class="chat">
-                <div class="sent">
-                    Hai portato a spasso il cane?
-                    <div class="chat-time">12:00</div>
-                </div>
-                <div class="sent">
-                    Ricordati di stendere i panni
-                    <div class="chat-time">12:00</div>
-                </div>
-                <div class="received">
-                    Tutto fatto!
-                    <div class="chat-time">12:00</div>
-                </div>
-                <div class="received">
-                    Ciao
-                    <div class="chat-time">12:00</div>
+                <div 
+                class="chat-render" 
+                v-for="(contact, i) in arrContacts" 
+                :key="contact.name"
+                :class="{active: i === activeIndex}"
+                >
+                    <div 
+                    v-for="(messaggio, index) in contact.messages" 
+                    :class="messaggio.status" 
+                    :key="messaggio.message"
+                    >
+                        {{messaggio.message}}
                 </div>
             </div>
             <div class="bottom-bar">
