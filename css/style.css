@@ -169,6 +169,10 @@ body{
     color: gray;
 }
 
+.show-name{
+    display: none;
+}
+
 .chat{
     width: 100%;
     height: calc(100% - (var(--topbottom-bar-height) * 2));
@@ -176,10 +180,9 @@ body{
     overflow: auto;
 }
 
-.chat .chat-render{
-    display: flex;
-    flex-direction: column;
+.chat-render{
     display: none;
+    position: relative;
 }
 
 .sent, .received{
@@ -210,12 +213,13 @@ body{
 
 .chat .sent{
     background-color: rgb(213, 249, 186);
-    align-self: flex-end;
+    position: relative;
+    left: 400px;
+    
 }
 
 .chat .received{
     background-color: white;
-    align-self: flex-start;
 }
 
 .chat-time{

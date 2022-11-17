@@ -78,7 +78,13 @@
                     <div class="profile">
                         <img class="profile-img" src="img/avatar_1.jpg" alt="">
                         <div class="name-avatar">
-                            <p>Davide Sias</p>
+                            <p 
+                            class="show-name" 
+                            v-for="(avatarname, i) in arrContacts"
+                            :class="{active: i === activeIndex}"
+                            >
+                                {{ avatarname.name }}
+                            </p>
                             <p class="last-access">Ultimo accesso oggi alle 12:00</p>
                         </div>
                     </div>
@@ -94,11 +100,11 @@
                 <div 
                 class="chat-render" 
                 v-for="(contact, i) in arrContacts" 
-                :key="contact.name"
                 :class="{active: i === activeIndex}"
+                :key="contact.name"
                 >
                     <div 
-                    v-for="(messaggio, index) in contact.messages" 
+                    v-for="messaggio in contact.messages" 
                     :class="messaggio.status" 
                     :key="messaggio.message"
                     >
