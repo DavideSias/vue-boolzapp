@@ -165,5 +165,27 @@ let app = new Vue({
             }
         ],
         activeIndex: 0,
+        newMessage :
+            {
+                date: '10/01/2020 15:30:55',
+                message: '',
+                status: 'sent'
+            },
+            newAnswer :
+            {
+                date: '10/01/2020 15:30:55',
+                message: 'Ok',
+                status: 'received'
+            }
     },
+    methods: {
+        sendMessage(index){
+            if (this.newMessage.message.trim()) {
+				this.newMessage.message = this.newMessage.message.trim();
+                this.arrContacts[index].messages.push({...this.newMessage});
+                this.newMessage.message = '';
+                setTimeout(() => this.arrContacts[index].messages.push(this.newAnswer), 1000);
+            }
+        }
+    }
 })

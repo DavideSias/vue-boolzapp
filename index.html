@@ -66,7 +66,8 @@
                             <h2 class="username">{{ contact.name }}</h2>
                             <p class="time">{{ contact.messages[contact.messages.length - 1].date }}</p>
                         </div>
-                        <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</p>
+                        <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}
+                        </p>
                     </div>
                 </div>
                 
@@ -80,13 +81,17 @@
                         <div class="name-avatar">
                             <p 
                             class="show-name" 
-                            v-for="(avatarname, i) in arrContacts"
+                            v-for="(element, i) in arrContacts"
                             :class="{active: i === activeIndex}"
                             >
-                                {{ avatarname.name }}
+                                {{ element.name }}
                             </p>
-                            <p class="last-access">
-                                Ultimo accesso oggi alle 12:00
+                            <p class="last-access"
+                            class="show-name" 
+                            v-for="(element, i) in arrContacts"
+                            :class="{active: i === activeIndex}"
+                            >
+                                Ultimo accesso {{element.messages[element.messages.length - 1].date}}
                             </p>
                         </div>
                     </div>
@@ -105,17 +110,26 @@
                 :class="{active: i === activeIndex}"
                 :key="contact.name"
                 >
-                    <div 
-                    v-for="messaggio in contact.messages" 
-                    :class="messaggio.status" 
-                    :key="messaggio.message"
-                    >
-                        {{messaggio.message}}
+                <div class="flex-container">
+                    <div v-for="messaggio in contact.messages" :class="messaggio.status" :key="messaggio.message">
+
+                        {{messaggio.message}}  
+
+                        <div class="chat-time">
+                            {{messaggio.date}}
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div class="bottom-bar">
                 <i class="fa-regular fa-face-smile icon"></i>
-                <input type="text" placeholder="Scrivi un messaggio">
+                <input 
+                type="text" 
+                placeholder="Scrivi un messaggio" 
+                v-model="newMessage.message"
+                @keyup.enter="sendMessage(activeIndex)"
+                >
                 <i class="fa-solid fa-microphone icon"></i>
             </div>
         </div>

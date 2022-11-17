@@ -164,9 +164,10 @@ body{
     width: 100%;
 }
 
-.right-side .last-access{
+.last-access{
     font-size: 12px;
     color: gray;
+    display: none;
 }
 
 .show-name{
@@ -174,7 +175,7 @@ body{
 }
 
 .chat{
-    width: 100%;
+    max-width: 100%;
     height: calc(100% - (var(--topbottom-bar-height) * 2));
     padding: 3rem 5rem;
     overflow: auto;
@@ -182,16 +183,22 @@ body{
 
 .chat-render{
     display: none;
-    position: relative;
+}
+
+.chat-render .flex-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .sent, .received{
     position: relative;
-    min-width: 15%;
-    max-width: 40%;
+    min-width: 30%;
+    max-width: 50%;
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
 }
 
 .sent::before, .received::before{
@@ -211,15 +218,14 @@ body{
     display: block;
 }
 
-.chat .sent{
+.sent{
     background-color: rgb(213, 249, 186);
-    position: relative;
-    left: 400px;
-    
+    align-self: flex-end;
 }
 
-.chat .received{
+.received{
     background-color: white;
+    align-self: start;
 }
 
 .chat-time{
@@ -227,7 +233,7 @@ body{
     color: gray;
     position: absolute;
     right: 5px;
-    bottom: 5px;
+    bottom: 3px;
 }
 
 .right-side .bottom-bar{
