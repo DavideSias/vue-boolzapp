@@ -195,12 +195,35 @@ let app = new Vue({
                 this.newMessage.message = '';
                 setTimeout(() => this.filteredName[index].messages.push(this.newAnswer), 1000);
             }
+        },
+
+        filterName(){
+            for(let i = 0; i < this.arrContacts.length; i++){
+                if(this.arrContacts[i].name.toLowerCase().includes(this.search.toLowerCase())){
+                    this.arrContacts[i].visible = true;
+                } else {
+                    this.arrContacts[i].visible = false;
+                }
+            }
+        },
+
+        deleteMessage(i, index){
+            this.arrContacts[i].messages.splice(index, 1);
+            console.log(this.arrContacts[i].messages)
+            //TODO - non cancella l'ultimo messaggio
         }
-    },
+    }
+
+})
+    
+
+    // alternativa per filtrare le chat (in questo caso nell'html iterare i v-for sul nuovo array crato con filteredName e non su arrContacts) il problema di questa soluzione è che filtra in automatico direttamente anche la chat visualizzata a destra
+
+    /* 
     computed: {
         filteredName(){
             console.log(this.search);
             return this.arrContacts.filter(names => names.name.toLowerCase().includes(this.search.toLowerCase()));
         }
     }
-})
+    */

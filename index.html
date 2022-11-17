@@ -51,23 +51,28 @@
                 <button>
                     <i class="fa-solid fa-magnifying-glass icon"></i>
                 </button>
-                <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="search" />
+                <input 
+                type="text" 
+                placeholder="Cerca o inizia una nuova chat" 
+                v-model="search" 
+                @keyup="filterName"/>
             </div>
             <div class="chat-messages">
-                <div 
-                class="chat-left-side" 
-                v-for="(contact, i) in filteredName" 
+                <div class="chat-left-container" 
+                v-for="(contact, i) in arrContacts" 
+                :class="{active: contact.visible}"
                 :key="contact.id"
-                @click="activeIndex = i"
-                >
-                    <img class="avatar" :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar">
-                    <div class="user-update">
-                        <div class="user-info">
-                            <h2 class="username">{{ contact.name }}</h2>
-                            <p class="time">{{ contact.messages[contact.messages.length - 1].date }}</p>
+                @click="activeIndex = i">
+                    <div class="chat-left-side" >
+                        <img class="avatar" :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar">
+                        <div class="user-update">
+                            <div class="user-info">
+                                <h2 class="username">{{ contact.name }}</h2>
+                                <p class="time">{{ contact.messages[contact.messages.length - 1].date }}</p>
+                            </div>
+                            <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}
+                            </p>
                         </div>
-                        <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -76,18 +81,21 @@
             <div class="user-status-top">
                 <div class="profile-bar">
                     <div class="profile">
-                        <img class="profile-img" v-for="(element, i) in filteredName"  :class="{active: i === activeIndex}" :src="'img/avatar' + element.avatar + '.jpg'"  alt="avatar">
+                        <img class="profile-img" 
+                        v-for="(element, i) in arrContacts"  
+                        :class="{active: i === activeIndex}" 
+                        :src="'img/avatar' + element.avatar + '.jpg'"  
+                        alt="avatar">
                         <div class="name-avatar">
-                            <p 
-                            class="show-name" 
-                            v-for="(element, i) in filteredName"
+                            <p class="show-name" 
+                            v-for="(element, i) in arrContacts"
                             :class="{active: i === activeIndex}"
                             >
                                 {{ element.name }}
                             </p>
                             <p class="last-access"
                             class="show-name" 
-                            v-for="(element, i) in filteredName"
+                            v-for="(element, i) in arrContacts"
                             :class="{active: i === activeIndex}"
                             >
                                 Ultimo accesso {{element.messages[element.messages.length - 1].date}}
@@ -103,27 +111,25 @@
                 </div>
             </div>
             <div class="chat">
-                <div 
-                class="chat-render" 
-                v-for="(contact, i) in filteredName" 
+                <div class="chat-render" 
+                v-for="(contact, i) in arrContacts" 
                 :class="{active: i === activeIndex}"
                 >
                 <div class="flex-container">
-                    <div v-for="messaggio in contact.messages" :class="messaggio.status">
+                    <div v-for="(messaggio, index) in contact.messages" :class="messaggio.status">
 
                         {{messaggio.message}}  
 
                         <div class="chat-time">
                             {{messaggio.date}}
                         </div>
-
+                        <i @click="deleteMessage(i, index)" class="fa-solid fa-chevron-down arrow-icon"></i>
                     </div>
                 </div>
             </div>
             <div class="bottom-bar">
                 <i class="fa-regular fa-face-smile icon"></i>
-                <input 
-                type="text" 
+                <input type="text" 
                 placeholder="Scrivi un messaggio" 
                 v-model="newMessage.message"
                 @keyup.enter="sendMessage(activeIndex)"

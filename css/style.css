@@ -130,7 +130,11 @@ body{
     overflow-y: auto;
 }
 
-.chat-messages .chat-left-side{
+.chat-left-container{
+    display: none;
+}
+
+.chat-left-side{
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -203,21 +207,18 @@ body{
     overflow-wrap: break-word;
 }
 
-.sent::before, .received::before{
+.arrow-icon{
     position: absolute;
     top: 5px;
     right: 10px;
-    content: "\f078";
-    font-family: "Font Awesome 5 Free";
     font-size: 12px;
-    font-weight: 900;
     color: gray;
     cursor: pointer;
-    display: none;
+    visibility: hidden;
 }
 
-.sent:hover::before, .received:hover::before{
-    display: block;
+.sent:hover .arrow-icon, .received:hover .arrow-icon{
+    visibility: visible;
 }
 
 .sent{
