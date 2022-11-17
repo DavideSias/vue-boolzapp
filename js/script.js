@@ -191,9 +191,9 @@ let app = new Vue({
         sendMessage(index){
             if (this.newMessage.message.trim()) {
 				this.newMessage.message = this.newMessage.message.trim();
-                this.filteredName[index].messages.push({...this.newMessage});
+                this.arrContacts[index].messages.push({...this.newMessage});
                 this.newMessage.message = '';
-                setTimeout(() => this.filteredName[index].messages.push(this.newAnswer), 1000);
+                setTimeout(() => this.arrContacts[index].messages.push(this.newAnswer), 1000);
             }
         },
 
