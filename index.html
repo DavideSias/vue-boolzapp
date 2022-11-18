@@ -78,17 +78,17 @@
             <div class="user-status-top">
                 <div class="profile-bar">
                     <div class="profile">
-                        <img class="profile-img" v-for="(element, i) in arrContacts"
-                            :class="{active: i === activeIndex}" :src="'img/avatar' + element.avatar + '.jpg'"
+                        <img class="profile-img" v-for="(contact, i) in arrContacts"
+                            :class="{active: i === activeIndex}" :src="'img/avatar' + contact.avatar + '.jpg'"
                             alt="avatar">
                         <div class="name-avatar">
-                            <p class="show-name" v-for="(element, i) in arrContacts"
+                            <p class="show-name" v-for="(contact, i) in arrContacts"
                                 :class="{active: i === activeIndex}">
-                                {{ element.name }}
+                                {{ contact.name }}
                             </p>
-                            <p class="last-access" class="show-name" v-for="(element, i) in arrContacts"
+                            <p class="last-access" class="show-name" v-for="(contact, i) in arrContacts"
                                 :class="{active: i === activeIndex}">
-                                Ultimo accesso {{ element.messages.length ? element.messages[element.messages.length - 1].date : '' }}
+                                Ultimo accesso {{ contact.messages.length ? contact.messages[contact.messages.length - 1].date : '' }}
                             </p>
                         </div>
                     </div>
@@ -110,8 +110,8 @@
                             <div class="chat-time">
                                 {{messaggio.date}}
                             </div>
-                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
-                            <ul class="dropdown">
+                            <i @click="checkShow(index)" class="fa-solid fa-chevron-down arrow-icon"></i>
+                            <ul v-show="messaggio.show" class="dropdown">
                                 <li>Info messaggio</li>
                                 <li @click="deleteMessage(index)">Cancella messaggio</li>
                             </ul>
