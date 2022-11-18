@@ -176,13 +176,13 @@ let app = new Vue({
         search: '',
         newMessage :
             {
-                date: '10/01/2020 15:30:55',
+                date: new Date().toISOString().replaceAll('-', '/').replaceAll('T', ' ').split('.')[0],
                 message: '',
                 status: 'sent'
             },
             newAnswer :
             {
-                date: '10/01/2020 15:30:55',
+                date: new Date().toISOString().replaceAll('-', '/').replaceAll('T', ' ').split('.')[0],
                 message: 'Ok',
                 status: 'received'
             }
@@ -207,9 +207,9 @@ let app = new Vue({
             }
         },
 
-        deleteMessage(i, index){
-            this.arrContacts[i].messages.splice(index, 1);
-            console.log(this.arrContacts[i].messages)
+        deleteMessage(index){
+            this.arrContacts[this.activeIndex].messages.splice(index , 1);
+            console.log(this.arrContacts[this.activeIndex].messages)
             //TODO - non cancella l'ultimo messaggio
         }
     }
