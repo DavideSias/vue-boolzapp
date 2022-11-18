@@ -65,9 +65,9 @@
                         <div class="user-update">
                             <div class="user-info">
                                 <h2 class="username">{{ contact.name }}</h2>
-                                <p class="time">{{ contact.messages[contact.messages.length - 1].date }}</p>
+                                <p class="time">{{ contact.messages.length ? contact.messages[contact.messages.length - 1].date : '' }}</p>
                             </div>
-                            <p class="last-message">{{ contact.messages[contact.messages.length - 1].message }}
+                            <p class="last-message">{{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : '' }}
                             </p>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                             </p>
                             <p class="last-access" class="show-name" v-for="(element, i) in arrContacts"
                                 :class="{active: i === activeIndex}">
-                                Ultimo accesso {{element.messages[element.messages.length - 1].date}}
+                                Ultimo accesso {{ element.messages.length ? element.messages[element.messages.length - 1].date : '' }}
                             </p>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="chat">
-                <div class="chat-render" v-for="(contact, i) in arrContacts" :class="{active: i === activeIndex}"  v-if="arrContacts[i].messages.length !== 0">
+                <div class="chat-render" v-for="(contact, i) in arrContacts" :class="{active: i === activeIndex}">
                     <div class="flex-container">
                         <div v-for="(messaggio, index) in contact.messages" :class="messaggio.status">
 
@@ -110,11 +110,14 @@
                             <div class="chat-time">
                                 {{messaggio.date}}
                             </div>
-                            <i @click="deleteMessage(index)" class="fa-solid fa-chevron-down arrow-icon"></i>
+                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                            <ul class="dropdown">
+                                <li>Info messaggio</li>
+                                <li @click="deleteMessage(index)">Cancella messaggio</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div v-else>Non ci sono messaggi</div>
                 <div class="bottom-bar">
                     <i class="fa-regular fa-face-smile icon"></i>
                     <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage.message"
